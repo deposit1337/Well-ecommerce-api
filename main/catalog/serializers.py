@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Brand,Category,Item,AdditionalPicture
+from .models import Brand, Category, Item, AdditionalPicture
+
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
