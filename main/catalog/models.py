@@ -1,0 +1,54 @@
+from django.db import models
+
+
+# Create your models here.
+
+
+class Brand(models.Model):
+    brand = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренды'
+
+    def __str__(self):
+        return self.brand
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    broad_name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self):
+        return self.name
+
+
+class AdditionalPicture(models.Model):
+    picture = models.ImageField(upload_to='images/additional_images/')
+
+
+    class Meta:
+        verbose_name = 'Дополнительное фото'
+        verbose_name_plural = 'Дополнительные фото'
+
+
+class Item(models.Model):
+    full_name = models.CharField(max_length=100)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    vendor = models.CharField(max_length=100)
+    description = models.TextField(max_length=500)
+    main_picture = models.ImageField(upload_to='images/')
+    additional_pic = models.ManyToManyField(AdditionalPicture)
+
+
+
+    class Meta:
+        verbose_name = 'Предмет'
+        verbose_name_plural = 'Предметы'
+
+    def __str__(self):
+        return self.full_name
