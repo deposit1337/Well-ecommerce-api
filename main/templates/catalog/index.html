@@ -1,10 +1,307 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    fasda
-</body>
+<html lang="ru">
+  <head>
+      {% load static %}
+    <meta charset="UTF-8" />
+    <meta
+      name="keywords"
+      content="sawing teeth,machines,пильные зубья,гусеницы"
+    />
+    <meta name="author" content="Well" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'reset.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
+<!--    <link rel="stylesheet" type="text/css" href="styles/header.css" />-->
+<!--    <link rel="stylesheet" type="text/css" href="styles/hero.css" />-->
+<!--    <link rel="stylesheet" type="text/css" href="styles/category.css" />-->
+<!--    <link rel="stylesheet" type="text/css" href="styles/footer.css" />-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Well</title>
+  </head>
+  <body>
+    <!-- start header -->
+    <!-- <div class="container"> -->
+    <!-- <div class="container"> -->
+    <header>
+      <nav class="navigation">
+        <ul class="navigation__list">
+          <li class="navigation__item">
+            <a href="index.html " class="well-icon-link"
+              ><img
+                src="assets\svgs\header-logo.svg"
+                class="well-icon"
+                alt="logo"
+            /></a>
+          </li>
+          <div class="icons-container">
+            <form action="/search" method="get" class="hidden search-form">
+              <!-- Добавлен класс 'hidden' для скрытия формы -->
+              <input
+                class="search-input"
+                type="search"
+                name="query"
+                placeholder="Найти по артикулу"
+              />
+              <button class="find-btn" id="new-icon" type="submit"></button>
+            </form>
+            <li class="navigation__item" id="search-icon">
+              <a><img src="assets\svgs\search.svg" alt="search" /></a>
+              <!-- Добавлен id 'search-icon' для поиска по клику -->
+            </li>
+            <li class="navigation__item">
+              <a href="cart.html"
+                ><img src="assets\svgs\cart-icon.svg" alt="cart"
+              /></a>
+            </li>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- end header -->
+    <!-- start main -->
+    <main>
+      <!-- start hero -->
+      <!-- <div class="container"> -->
+      <section id="hero-sec" class="hero">
+        <div class="hero-pic">
+          <span id="trigger-element" class="star">*</span>
+          <h1 id="change-element" class="main-quote">
+            make sure your business goes
+            <img src="assets\svgs\well-hero.svg" alt="well-hero" />
+          </h1>
+          <h1 id="element-replacement" class="none not main-quote-fix">
+            Убедитесь в процветании вашего бизнеса
+            <!-- <div id="trigger-element" class="star">*</div> -->
+          </h1>
+
+          <h2 class="bottom-quote">
+            Мы предлагаем такие-то такие-то условия и вообще у нас все круто
+            прям капец клянусь.
+          </h2>
+          <div class="container">
+            <a href="#catalog-sec" class="hero-btn">перейти к каталогу</a>
+          </div>
+        </div>
+      </section>
+      <!-- </div> -->
+      <!-- end hero -->
+
+      <!-- start catalog -->
+      <section id="catalog-sec" class="catalog">
+        <div class="red-stripe"></div>
+        <div class="container">
+          <ul class="catalog__list">
+            <div class="category-container-triple">
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+            </div>
+            <div class="category-container-triple">
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+              <li class="catalog__item">
+                <a href="category.html">
+                  <img
+                    src="\pictures\item.png"
+                    alt="item-pic"
+                    class="item-pic"
+                  />
+                  <h4 class="category-name">Зубья</h4>
+                  <h5 class="sub-brand">
+                    Bobcat
+                    <div>1</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                  <h5 class="sub-brand">
+                    Delta
+                    <div>4</div>
+                  </h5>
+                  <div class="dotted-line"></div>
+                </a>
+              </li>
+            </div>
+
+          </ul>
+        </div>
+        <div class="pinkish-stripe"></div>
+      </section>
+    </main>
+
+    <!-- end main -->
+    <!-- start footer -->
+    <footer>
+      <div class="container-footer">
+        <div class="top-footer">
+          <img src="assets\svgs\shortend.svg" alt="w-short" />
+          <p class="footer-par">Вопросы по номеру</p>
+          <address class="phone">+7 (800) 5534-228</address>
+          <address class="mail">pochta@mail.ru</address>
+        </div>
+        <div class="navigation-footer-container">
+          <p class="nav-footer">Навигация по сайту</p>
+          <nav class="navigation-footer">
+            <ul class="nav-footer__list">
+              <li class="nav-footer__item">
+                <a href="">Категория 1</a>
+              </li>
+              <li class="nav-footer__item">
+                <a href="">Категория 2</a>
+              </li>
+              <li class="nav-footer__item">
+                <a href="">Категория 3</a>
+              </li>
+              <li class="nav-footer__item">
+                <a href="">Категория 4</a>
+              </li>
+              <li class="nav-footer__item">
+                <a href="">Категория 5</a>
+              </li>
+              <li class="nav-footer__item">
+                <a href="">Категория 6</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-info-container">
+          <h6 class="footer-info">
+            Компания «Тимбермаш Байкал» - дилер спецтехники мировых брендов
+            Sany, Merko, Mesda, HBXG (Shewa), Rotobec (RTB), Hangcha, YTO,
+            Orthaus, CHC Nav, FJDynamics, Gehl, Manitou, John Deere, FAE,
+            Waratah, Ponsse, Gregoire Bessone, Lucas. Мы предлагаем спецтехнику
+            для дорожно-строительной, лесозаготовительной, сельскохозяйственной
+            отрасли, а также оригинальные запчасти и качественный сервис.
+            Тимбермаш Байкал - это надежная спецтехника в наличии и под заказ;
+            передовые технологии в обслуживании техники; квалифицированные
+            специалисты сервиса. Приобретайте спецтехнику в лизинг на выгодных
+            условиях, действует услуга Trade-IN, предлагаем варианты техники со
+            стажем (б/у).
+          </h6>
+        </div>
+        <div class="credits">
+          <p class="credits_txt">
+            Designed and built with all the love in the world by the
+            <a class="depo" href="">depo</a> .
+            <span class="license"
+              >Code licensed <a class="mit" href="">MIT</a></span
+            >.
+          </p>
+        </div>
+      </div>
+      <div class="bottom-footer">
+        <div class="dark-stripe">
+          <span class="commerce">© Well, Russia. Все права защищены.</span>
+        </div>
+      </div>
+    </footer>
+    <!-- end footer -->
+  </body>
+  <script src="scripts\main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="scripts\hero.js"></script>
+  <script src="scripts\index.js"></script>
 </html>
