@@ -3,7 +3,6 @@ from django.db import models
 
 # Create your models here.
 
-
 class Brand(models.Model):
     brand = models.CharField(max_length=100)
 
@@ -16,20 +15,21 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    category_name = models.CharField(max_length=100)
+    category_picture = models.ImageField(upload_to='images/category-images/',default=None,null=True)
     broad_name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=255, default=None, null=True)
 
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
 
 class AdditionalPicture(models.Model):
     picture = models.ImageField(upload_to='images/additional_images/')
-
 
     class Meta:
         verbose_name = 'Дополнительное фото'
@@ -43,8 +43,10 @@ class Item(models.Model):
     description = models.TextField(max_length=500)
     main_picture = models.ImageField(upload_to='images/')
     additional_pic = models.ManyToManyField(AdditionalPicture)
-
-
+    category_name = models.ForeignKey(Category, on_delete=models.CASCADE, default=None, null=True)
+    slug = models.SlugField(max_length=255, default=None, null=True)
+    in_stock = models.BooleanField(default=True)
+    price = models.DecimalField(max_length=100, max_digits=6, decimal_places=0, default=None, null=True)
 
     class Meta:
         verbose_name = 'Предмет'

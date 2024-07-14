@@ -11,3 +11,4 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, '/Well-ecommerce-api/main/db.sqlite3'),
     }
 }
+
