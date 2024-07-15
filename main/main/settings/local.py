@@ -1,4 +1,5 @@
 from .base import *
+from django.core.cache import cache
 
 
 
@@ -12,3 +13,4 @@ DATABASES = {
     }
 }
 
+# cache.clear()

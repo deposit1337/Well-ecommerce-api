@@ -63,7 +63,7 @@ header {
   border: none;
   background-color: transparent;
   font-size: 0;
-  background: url(/assets/svgs/search-brownish.svg) 0 0 no-repeat;
+  background: url(/static/assets/svgs/search-brownish.svg) 0 0 no-repeat;
   background-position: center;
   width: 24px;
   height: 24px;
@@ -144,3 +144,7 @@ header {
 .search-input {
   text-indent: 8px; /* Устанавливает отступ в 10 пикселей */
 }
+
+
+
+
