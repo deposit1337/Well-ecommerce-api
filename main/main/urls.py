@@ -41,6 +41,8 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name='schema')),
     path('', include('catalog.urls', namespace='catalog')),
+    path('catalog/<slug:category_slug>/', views.catalog, name='category_catalog'),
+
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ru">
 <head>
-    {% load static %}
+
     <meta charset="UTF-8"/>
     <meta
             name="keywords"
@@ -101,15 +102,17 @@
         <div class="red-stripe"></div>
         <div class="container">
             <ul class="catalog__list">
+
                 <div class="category-container-triple">
+                    {% for category in first_three_categories %}
                     <li class="catalog__item">
-                        <a href="category.html">
+                        <a href="{% url 'category_catalog' category.slug %}">
                             <img
                                     src="\static\assets\pictures\item.png"
                                     alt="item-pic"
                                     class="item-pic"
                             />
-                            <h4 class="category-name">Зубья</h4>
+                            <h4 class="category-name">{{category.category_name}}</h4>
                             <h5 class="sub-brand">
                                 Bobcat
                                 <div>1</div>
@@ -122,56 +125,18 @@
                             <div class="dotted-line"></div>
                         </a>
                     </li>
-                    <li class="catalog__item">
-                        <a href="category.html">
-                            <img
-                                    src="\static\assets\pictures\item.png"
-                                    alt="item-pic"
-                                    class="item-pic"
-                            />
-                            <h4 class="category-name">Зубья</h4>
-                            <h5 class="sub-brand">
-                                Bobcat
-                                <div>1</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                            <h5 class="sub-brand">
-                                Delta
-                                <div>4</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                        </a>
-                    </li>
-                    <li class="catalog__item">
-                        <a href="category.html">
-                            <img
-                                    src="\static\assets\pictures\item.png"
-                                    alt="item-pic"
-                                    class="item-pic"
-                            />
-                            <h4 class="category-name">Зубья</h4>
-                            <h5 class="sub-brand">
-                                Bobcat
-                                <div>1</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                            <h5 class="sub-brand">
-                                Delta
-                                <div>4</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                        </a>
-                    </li>
+                    {% endfor %}
                 </div>
                 <div class="category-container-triple">
+                    {% for category in next_three_categories %}
                     <li class="catalog__item">
                         <a href="category.html">
                             <img
-                                    src="\static\assets\pictures\item.png"
+                                    src="{{ category.category_picture.url }}"
                                     alt="item-pic"
                                     class="item-pic"
                             />
-                            <h4 class="category-name">Зубья</h4>
+                            <h4 class="category-name">{{category.category_name}}</h4>
                             <h5 class="sub-brand">
                                 Bobcat
                                 <div>1</div>
@@ -184,46 +149,7 @@
                             <div class="dotted-line"></div>
                         </a>
                     </li>
-                    <li class="catalog__item">
-                        <a href="category.html">
-                            <img
-                                    src="\static\assets\pictures\item.png"
-                                    alt="item-pic"
-                                    class="item-pic"
-                            />
-                            <h4 class="category-name">Зубья</h4>
-                            <h5 class="sub-brand">
-                                Bobcat
-                                <div>1</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                            <h5 class="sub-brand">
-                                Delta
-                                <div>4</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                        </a>
-                    </li>
-                    <li class="catalog__item">
-                        <a href="category.html">
-                            <img
-                                    src="\static\assets\pictures\item.png"
-                                    alt="item-pic"
-                                    class="item-pic"
-                            />
-                            <h4 class="category-name">Зубья</h4>
-                            <h5 class="sub-brand">
-                                Bobcat
-                                <div>1</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                            <h5 class="sub-brand">
-                                Delta
-                                <div>4</div>
-                            </h5>
-                            <div class="dotted-line"></div>
-                        </a>
-                    </li>
+                    {% endfor %}
                 </div>
 
             </ul>

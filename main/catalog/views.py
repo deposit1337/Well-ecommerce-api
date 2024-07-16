@@ -4,6 +4,7 @@ from rest_framework.response import Response
 import sys
 from .models import Item, Brand, AdditionalPicture, Category
 from .serializers import ItemSerializer, CategorySerializer, BrandSerializer, AdditionalPictureSerializer
+
 sys.path.append('D:/Well-ecommerce-api/main/')
 from drf_spectacular.utils import extend_schema
 
@@ -34,5 +35,14 @@ class CategoryView(viewsets.ViewSet):
 
 def home_page(request):
     categories = Category.objects.all()
-    return render(request, 'catalog/index.html', {'categories': categories})
+    first_three_categories = categories[:3]
+    next_three_categories = categories[3:6]
+    return render(request, 'catalog/index.html',
+                  {'first_three_categories': first_three_categories, 'next_three_categories': next_three_categories})
 
+
+
+def catalog(request, category_slug):
+    category = Category.objects.get(slug=category_slug)
+    items = Item.objects.filter(category_name=category)
+    return render(request, 'catalog/catalog.html', {'category': category, 'items': items})

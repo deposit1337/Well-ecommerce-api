@@ -15,9 +15,9 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=100)
+    category_name = models.CharField(max_length=100,default=None,null=True)
     category_picture = models.ImageField(upload_to='images/category-images/',default=None,null=True)
-    broad_name = models.CharField(max_length=100)
+    broad_name = models.CharField(max_length=100,default=None,null=True)
     slug = models.SlugField(max_length=255, default=None, null=True)
 
     class Meta:
