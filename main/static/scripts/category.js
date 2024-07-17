@@ -5,7 +5,7 @@
 //   button.classList.toggle("clicked");
 //   button.innerText = "Добавлено";
 // }
-
+//
 function changeColor() {
   var button = document.querySelector(".add-to-cart-in-item-btn");
   var buttonCategory = document.querySelector(".add-to-cart-btn");
@@ -34,6 +34,7 @@ function changeColorCat() {
     buttonCategory.innerText = "Добавлено";
   }
 }
+
 
 // drop list
 var dropTrigger = document.getElementById("drop-trigger");

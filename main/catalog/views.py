@@ -46,3 +46,11 @@ def catalog(request, category_slug):
     category = Category.objects.get(slug=category_slug)
     items = Item.objects.filter(category_name=category)
     return render(request, 'catalog/catalog.html', {'category': category, 'items': items})
+
+def item_detail(request, category_slug, item_id):
+    item = get_object_or_404(Item, id=item_id)
+    return render(request, 'catalog/item-of-category.html', {'category_slug': category_slug, 'item': item})
+
+
+def cart(request):
+    return render(request, 'catalog/cart.html')

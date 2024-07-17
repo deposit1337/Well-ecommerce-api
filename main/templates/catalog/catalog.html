@@ -1,200 +1,223 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
+{% load static %}
+
+<head>
+
+    <meta charset="UTF-8"/>
     <meta
-      name="keywords"
-      content="sawing teeth,machines,пильные зубья,гусеницы"
+            name="keywords"
+            content="sawing teeth,machines,пильные зубья,гусеницы"
     />
-    <meta name="author" content="Well" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="styles/header.css" />
-    <link rel="stylesheet" type="text/css" href="styles/hero.css" />
-    <link rel="stylesheet" type="text/css" href="styles/category.css" />
-    <link rel="stylesheet" type="text/css" href="styles/footer.css" />
+    <meta name="author" content="Well"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/reset.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/header.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/hero.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/category.css'%}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/category-chosen.css' %}?v=1.1"/>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+            rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="styles/category-chosen.css" />
-    <title>Category</title>
-  </head>
-  <body>
-    <!-- start header -->
-    <header>
-      <nav class="navigation">
+
+    <title>Well</title>
+</head>
+<body>
+<!-- start header -->
+<header>
+    <nav class="navigation">
         <ul class="navigation__list">
-          <li class="navigation__item">
-            <a href="index.html"
-              ><img src="assets\svgs\well-brownish.svg" alt="logo"
-            /></a>
-          </li>
-          <div class="icons-container">
             <li class="navigation__item">
-              <a href=""
-                ><img src="assets\svgs\search-brownish.svg" alt="search"
-              /></a>
+                <a href="{% url 'home_page' %} " class="well-icon-link"
+                ><img
+                        src="\static\assets\svgs\well-brownish.svg"
+                        class="well-icon"
+                        alt="logo"
+                /></a>
             </li>
-            <li class="navigation__item">
-              <a href="cart.html"
-                ><img src="assets\svgs\shopping-cart-brownish.svg" alt="cart"
-              /></a>
-            </li>
-          </div>
+            <div class="icons-container">
+                <form action="/search" method="get" class="hidden search-form">
+                    <!-- Добавлен класс 'hidden' для скрытия формы -->
+                    <input
+                            class="search-input"
+                            type="search"
+                            name="query"
+                            placeholder="Найти по артикулу"
+                    />
+                    <button class="find-btn" id="new-icon" type="submit"></button>
+                </form>
+                <li class="navigation__item" id="search-icon">
+                    <a><img src="\static\assets\svgs\search-brownish.svg" alt="search"/></a>
+                    <!-- Добавлен id 'search-icon' для поиска по клику -->
+                </li>
+                <li class="navigation__item">
+                    <a href="cart.html"
+                    ><img src="\static\assets\svgs\shopping-cart-brownish.svg" alt="cart"
+                    /></a>
+                </li>
+            </div>
         </ul>
-      </nav>
-    </header>
-    <!-- end header -->
+    </nav>
+</header>
+<!-- end header -->
 
-    <!-- start main -->
-    <main>
-      <div class="grey-stripe">
+<!-- start main -->
+<main>
+    <div class="grey-stripe">
         <div class="container">
-          <div class="resolution">
-            <div class="nav-on-page">
-              Главная | <a class="current-link">Зубья</a>
-            </div>
-            <h3 class="category-item">Пильные зубья</h3>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="drop-list-brand">
-          <div id="drop-trigger">
-            Бренд <img src="assets\svgs\arrow-down.svg" class="down-arrow" />
-          </div>
-          <div class="content">
-            <div class="drop-list-brand__item">
-              <input
-                class="checkbox-custom"
-                type="checkbox"
-                id="brand1"
-                name="brand1"
-                value="brand1"
-              />
-              <label for="brand1">Bandit</label><br />
-            </div>
-            <div class="drop-list-brand__item">
-              <input
-                class="checkbox-custom"
-                type="checkbox"
-                id="brand1"
-                name="brand1"
-                value="brand1"
-              />
-              <label for="brand1">Bandit</label><br />
-            </div>
-            <div class="drop-list-brand__item">
-              <input
-                class="checkbox-custom"
-                type="checkbox"
-                id="brand1"
-                name="brand1"
-                value="brand1"
-              />
-              <label for="brand1">Bandit</label><br />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <section class="items-sec">
-          <ul class="category-item__list">
-            <div class="container-fixed">
-              {% for item in items %}
-              <li class="category-items__item">
-                <div class="category-item-link" href="item-of-category.html">
-                  <a href="#"
-                    ><img src="pictures\item-category.png" alt="category item"
-                  /></a>
-                  <h6 class="name-of-brand">{{item.full_name}}</h6>
-                  <h6 class="vendor">#Q10233T</h6>
-                  <button onclick="changeColorCat()" class="add-to-cart-btn">
-                    В корзину
-                  </button>
+            <div class="resolution">
+                <div class="nav-on-page">
+                    Главная | <a class="current-link">Зубья</a>
                 </div>
-              </li>
-              {% endfor %}
+                <h3 class="category-item">Пильные зубья</h3>
             </div>
-            <div class="container-fixed">
+        </div>
+    </div>
+    <div class="container">
+        <div class="drop-list-brand">
+            <div id="drop-trigger">
+                Бренд <img src="assets\svgs\arrow-down.svg" class="down-arrow"/>
+            </div>
+            <div class="content">
+                <div class="drop-list-brand__item">
+                    <input
+                            class="checkbox-custom"
+                            type="checkbox"
+                            id="brand1"
+                            name="brand1"
+                            value="brand1"
+                    />
+                    <label for="brand1">Bandit</label><br/>
+                </div>
+                <div class="drop-list-brand__item">
+                    <input
+                            class="checkbox-custom"
+                            type="checkbox"
+                            id="brand1"
+                            name="brand1"
+                            value="brand1"
+                    />
+                    <label for="brand1">Bandit</label><br/>
+                </div>
+                <div class="drop-list-brand__item">
+                    <input
+                            class="checkbox-custom"
+                            type="checkbox"
+                            id="brand1"
+                            name="brand1"
+                            value="brand1"
+                    />
+                    <label for="brand1">Bandit</label><br/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <section class="items-sec">
+            <ul class="category-item__list">
+                <div class="container-fixed">
+                    {% for item in items %}
+                    <li class="category-items__item">
+                        <div class="category-item-link" href="item-of-category.html">
+                            <a href="{% url 'item_detail' category_slug=category.slug item_id=item.id %}"
+                            ><img src="{{ item.main_picture.url }}" alt="category item"
+                            /></a>
+                            <h6 class="name-of-brand">{{item.brand}}</h6>
+                            <h6 class="vendor">#Q10233T</h6>
+                            <button onclick="changeColorCat()" class="add-to-cart-btn">
+                                В корзину
+                            </button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </div>
+                <div class="container-fixed">
 
-            </div>
-          </ul>
+                </div>
+            </ul>
         </section>
-      </div>
-    </main>
-    <!-- end main -->
-    <!-- start  footer -->
-    <footer>
-      <div class="container-footer">
+    </div>
+</main>
+<!-- end main -->
+<!-- start  footer -->
+<footer>
+    <div class="container-footer">
         <div class="top-footer">
-          <img src="assets\svgs\shortend.svg" alt="w-short" />
-          <p class="footer-par">Вопросы по номеру</p>
-          <address class="phone">+7 (800) 5534-228</address>
-          <address class="mail">pochta@mail.ru</address>
+            <img src="assets\svgs\shortend.svg" alt="w-short"/>
+            <p class="footer-par">Вопросы по номеру</p>
+            <address class="phone">+7 (800) 5534-228</address>
+            <address class="mail">pochta@mail.ru</address>
         </div>
         <div class="navigation-footer-container">
-          <p class="nav-footer">Навигация по сайту</p>
-          <nav class="navigation-footer">
-            <ul class="nav-footer__list">
-              <li class="nav-footer__item">
-                <a href="">Категория 1</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 2</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 3</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 4</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 5</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 6</a>
-              </li>
-            </ul>
-          </nav>
+            <p class="nav-footer">Навигация по сайту</p>
+            <nav class="navigation-footer">
+                <ul class="nav-footer__list">
+                    <li class="nav-footer__item">
+                        <a href="">Категория 1</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 2</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 3</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 4</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 5</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 6</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="footer-info-container">
-          <h6 class="footer-info">
-            Компания «Тимбермаш Байкал» - дилер спецтехники мировых брендов
-            Sany, Merko, Mesda, HBXG (Shewa), Rotobec (RTB), Hangcha, YTO,
-            Orthaus, CHC Nav, FJDynamics, Gehl, Manitou, John Deere, FAE,
-            Waratah, Ponsse, Gregoire Bessone, Lucas. Мы предлагаем спецтехнику
-            для дорожно-строительной, лесозаготовительной, сельскохозяйственной
-            отрасли, а также оригинальные запчасти и качественный сервис.
-            Тимбермаш Байкал - это надежная спецтехника в наличии и под заказ;
-            передовые технологии в обслуживании техники; квалифицированные
-            специалисты сервиса. Приобретайте спецтехнику в лизинг на выгодных
-            условиях, действует услуга Trade-IN, предлагаем варианты техники со
-            стажем (б/у).
-          </h6>
+            <h6 class="footer-info">
+                Компания «Тимбермаш Байкал» - дилер спецтехники мировых брендов
+                Sany, Merko, Mesda, HBXG (Shewa), Rotobec (RTB), Hangcha, YTO,
+                Orthaus, CHC Nav, FJDynamics, Gehl, Manitou, John Deere, FAE,
+                Waratah, Ponsse, Gregoire Bessone, Lucas. Мы предлагаем спецтехнику
+                для дорожно-строительной, лесозаготовительной, сельскохозяйственной
+                отрасли, а также оригинальные запчасти и качественный сервис.
+                Тимбермаш Байкал - это надежная спецтехника в наличии и под заказ;
+                передовые технологии в обслуживании техники; квалифицированные
+                специалисты сервиса. Приобретайте спецтехнику в лизинг на выгодных
+                условиях, действует услуга Trade-IN, предлагаем варианты техники со
+                стажем (б/у).
+            </h6>
         </div>
         <div class="credits">
-          <p class="credits_txt">
-            Designed and built with all the love in the world by the
-            <a class="depo" href="">depo</a> .
-            <span class="license"
-              >Code licensed <a class="mit" href="">MIT</a></span
-            >.
-          </p>
+            <p class="credits_txt">
+                Designed and built with all the love in the world by the
+                <a class="depo" href="">depo</a> .
+                <span class="license"
+                >Code licensed <a class="mit" href="">MIT</a></span
+                >.
+            </p>
         </div>
-      </div>
-      <div class="bottom-footer">
+    </div>
+    <div class="bottom-footer">
         <div class="dark-stripe">
-          <span class="commerce">© Well, Russia. Все права защищены.</span>
+            <span class="commerce">© Well, Russia. Все права защищены.</span>
         </div>
-      </div>
-    </footer>
-  </body>
-  <script src="scripts/category.js"></script>
+    </div>
+</footer>
+</body>
+<script src="\static\scripts\main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="\static\scripts\hero.js"></script>-->
+<script src="\static\scripts\index.js"></script>
+<script src="\static\scripts\category.js"></script>
+
+
 </html>
 <!-- end footer -->

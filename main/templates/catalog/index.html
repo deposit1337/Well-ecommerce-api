@@ -58,9 +58,9 @@
                     <!-- Добавлен id 'search-icon' для поиска по клику -->
                 </li>
                 <li class="navigation__item">
-                    <a href="cart.html"
-                    ><img src="\static\assets\svgs\cart-icon.svg" alt="cart"
-                    /></a>
+                    <a href="{% url 'cart' %}">
+                    <img src="{% static 'assets/svgs/cart-icon.svg' %}" alt="cart">
+                    </a>
                 </li>
             </div>
         </ul>
