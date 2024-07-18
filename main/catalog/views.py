@@ -52,5 +52,3 @@ def item_detail(request, category_slug, item_id):
     return render(request, 'catalog/item-of-category.html', {'category_slug': category_slug, 'item': item})
 
 
-def cart(request):
-    return render(request, 'catalog/cart.html')

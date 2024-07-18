@@ -18,6 +18,7 @@ import sys
 
 sys.path.append('D:/Well-ecommerce-api/main/')
 
+from basket import views
 from catalog import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
@@ -40,11 +41,11 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/docs/', SpectacularSwaggerView.as_view(url_name='schema')),
-    # path('', include('catalog.urls', namespace='catalog')),
+    path('', include('catalog.urls', namespace='catalog')),
     path('', views.home_page, name='home_page'),
     path('catalog/<slug:category_slug>/', views.catalog, name='category_catalog'),
     path('catalog/<slug:category_slug>/<int:item_id>/', views.item_detail, name='item_detail'),
-    path('cart/', views.cart, name='cart'),
+    path('basket/', include('basket.urls', namespace='basket'))
 
 ]
 

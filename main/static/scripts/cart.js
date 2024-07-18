@@ -38,3 +38,4 @@ $(".cross").on("click", function () {
     }
   );
 });
+

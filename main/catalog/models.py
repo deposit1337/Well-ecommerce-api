@@ -46,7 +46,7 @@ class Item(models.Model):
     category_name = models.ForeignKey(Category, on_delete=models.CASCADE, default=None, null=True)
     slug = models.SlugField(max_length=255, default=None, null=True)
     in_stock = models.BooleanField(default=True)
-    price = models.DecimalField(max_length=100, max_digits=6, decimal_places=0, default=None, null=True)
+    price = models.IntegerField( default=None, null=True)
 
     class Meta:
         verbose_name = 'Предмет'
