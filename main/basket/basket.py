@@ -17,3 +17,9 @@ class Basket():
         self.session.pop('_auth_user_hash', None)
 
         self.session.modified = True
+
+    def __len__(self):
+        '''
+        Get basket data and count qty of items
+        '''
+        return sum(item['qty'] for item in self.basket.values())

@@ -31,41 +31,7 @@
 </head>
 <body>
 <!-- start header -->
-<header>
-    <nav class="navigation">
-        <ul class="navigation__list">
-            <li class="navigation__item">
-                <a href="{% url 'home_page' %} " class="well-icon-link"
-                ><img
-                        src="\static\assets\svgs\well-brownish.svg"
-                        class="well-icon"
-                        alt="logo"
-                /></a>
-            </li>
-            <div class="icons-container">
-                <form action="/search" method="get" class="hidden search-form">
-                    <!-- Добавлен класс 'hidden' для скрытия формы -->
-                    <input
-                            class="search-input"
-                            type="search"
-                            name="query"
-                            placeholder="Найти по артикулу"
-                    />
-                    <button class="find-btn" id="new-icon" type="submit"></button>
-                </form>
-                <li class="navigation__item" id="search-icon">
-                    <a><img src="\static\assets\svgs\search-brownish.svg" alt="search"/></a>
-                    <!-- Добавлен id 'search-icon' для поиска по клику -->
-                </li>
-                <li class="navigation__item">
-                    <a href="cart.html"
-                    ><img src="\static\assets\svgs\shopping-cart-brownish.svg" alt="cart"
-                    /></a>
-                </li>
-            </div>
-        </ul>
-    </nav>
-</header>
+{% include 'catalog/fixed/navbar.html' %}
 <!-- end header -->
 
 <!-- start main -->

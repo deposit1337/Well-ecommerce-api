@@ -32,42 +32,7 @@
 </head>
 <body>
 <!-- start header -->
-<header>
-    <nav class="navigation">
-        <ul class="navigation__list">
-            <li class="navigation__item">
-                <a href="{% url 'home_page' %} " class="well-icon-link"
-                ><img
-                        src="\static\assets\svgs\well-brownish.svg"
-                        class="well-icon"
-                        alt="logo"
-                /></a>
-            </li>
-            <div class="icons-container">
-                <form action="/search" method="get" class="hidden search-form">
-                    <!-- Добавлен класс 'hidden' для скрытия формы -->
-                    <input
-                            class="search-input"
-                            type="search"
-                            name="query"
-                            placeholder="Найти по артикулу"
-                    />
-                    <button class="find-btn" id="new-icon" type="submit"></button>
-                </form>
-                <li class="navigation__item" id="search-icon">
-                    <a><img src="\static\assets\svgs\search-brownish.svg" alt="search"/></a>
-                    <!-- Добавлен id 'search-icon' для поиска по клику -->
-                </li>
-                <li class="navigation__item">
-                    <div id="basket-qty">1</div>
-                    <a href="cart.html"
-                    ><img src="\static\assets\svgs\shopping-cart-brownish.svg" alt="cart"
-                    /></a>
-                </li>
-            </div>
-        </ul>
-    </nav>
-</header>
+{% include 'catalog/fixed/navbar.html' %}
 <!-- start main -->
 <main>
     <div class="grey-stripe">
@@ -96,12 +61,7 @@
                 <button onclick="changeColor()" class="add-to-cart-in-item-btn" id="add-button" value="{{item.id}}">
                     В корзину
                 </button>
-                <select name="" id="select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+                <input type="number" id="quantity" name="quantity" min="1" max="200">
                 <div class="drop-list-comp">
                     <div id="drop-trigger-comp">
                         Комплектация
@@ -223,25 +183,29 @@
 <!--<script src="\static\scripts\basket.js"></script>-->
 
 <script>
-    $(document).on('click','#add-button',function(e) {
-        e.preventDefault();
-        console.log($('#select option:selected').text())
+$(document).on('click', '#add-button', function(e) {
+    e.preventDefault();
+    var quantity = $('#quantity').val();
+    if (quantity >= 1 && quantity <= 200) {
         $.ajax({
             type: 'POST',
             url: '{% url "basket:basket_add" %}',
             data: {
-                itemid : $('#add-button').val(),
-                itemqty: $('#select option:selected').text(),
-                csrfmiddlewaretoken : '{{csrf_token}}',
+                itemid: $('#add-button').val(),
+                itemqty: quantity,
+                csrfmiddlewaretoken: '{{csrf_token}}',
                 action: 'post',
             },
-            success: function(json){
-                document.getElementById('basket-qty').innerHTML = json.qty
+            success: function (json) {
+                document.getElementById('basket-qty').innerHTML = json.qty;
             },
-            error: function(xhr,errmsg,err){}
-         });
+            error: function (xhr, errmsg, err) {}
+        });
+    } else {
+        alert('Пожалуйста, введите число от 1 до 200.');
+    }
+});
 
-    })
 </script>
 
 </html>
