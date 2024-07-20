@@ -2,6 +2,10 @@ from django.db import models
 
 
 # Create your models here.
+class ItemManager(models.Manager):
+    def get_queryset(self):
+        return super(ItemManager, self).get_queryset().filter(is_active=True)
+
 
 class Brand(models.Model):
     brand = models.CharField(max_length=100)
@@ -15,9 +19,9 @@ class Brand(models.Model):
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=100,default=None,null=True)
-    category_picture = models.ImageField(upload_to='images/category-images/',default=None,null=True)
-    broad_name = models.CharField(max_length=100,default=None,null=True)
+    category_name = models.CharField(max_length=100, default=None, null=True)
+    category_picture = models.ImageField(upload_to='images/category-images/', default=None, null=True)
+    broad_name = models.CharField(max_length=100, default=None, null=True)
     slug = models.SlugField(max_length=255, default=None, null=True)
 
     class Meta:
@@ -46,7 +50,10 @@ class Item(models.Model):
     category_name = models.ForeignKey(Category, on_delete=models.CASCADE, default=None, null=True)
     slug = models.SlugField(max_length=255, default=None, null=True)
     in_stock = models.BooleanField(default=True)
-    price = models.IntegerField( default=None, null=True)
+    is_active = models.BooleanField(default=True)
+    price = models.IntegerField(default=None, null=True)
+    objects = models.Manager()
+    items = ItemManager()
 
     class Meta:
         verbose_name = 'Предмет'

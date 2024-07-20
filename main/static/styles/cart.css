@@ -35,12 +35,15 @@ body {
 }
 .cart-pic {
   margin-bottom: 10px;
+  transform: scale(0.7);
+
   /* position: absolute; */
   /* top: 0;
     left: 0;
     padding-right: 100px; */
 }
 .cart-pic-cont {
+
   display: grid;
   /* border: #c12222 1px solid; */
   width: 116px;
@@ -287,6 +290,7 @@ input::placeholder {
   right: 0;
   margin-right: 14px;
   margin-top: 14px;
+
 }
 .note::placeholder {
   padding-left: 4px;
@@ -395,8 +399,13 @@ footer {
 } */
 
 .cross {
-  width: 14px;
-  height: 14px;
+  width : 14px;
+  height : 14px;
+  border: none;
+  background-image : url(/static/assets/svgs/cross.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
   cursor: pointer;
 }
 
@@ -405,10 +414,18 @@ footer {
   padding: 0;
   margin: 0;
   width: 464px;
-  height: 680px; /* Установить фиксированную высоту (например, height: 300px;) */
+  height: 440px; /* Установить фиксированную высоту (например, height: 300px;) */
   overflow: auto; }
 
 
 .cart{
   height: 800px;
+}
+
+.update{
+    cursor : grab;
+    z-index: 100;
+    position: relative;
+    color: red;
+    margin-left:20px;
 }

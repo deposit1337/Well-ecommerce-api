@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+{% load static %}
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -8,13 +9,13 @@
     />
     <meta name="author" content="Well" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="styles/header.css" />
-    <link rel="stylesheet" type="text/css" href="styles/hero.css" />
-    <link rel="stylesheet" type="text/css" href="styles/category.css" />
-    <link rel="stylesheet" type="text/css" href="styles/footer.css" />
-    <link rel="stylesheet" type="text/css" href="styles/cart.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/reset.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/header.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/hero.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/category.css'%}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/cart.css' %}?v=1.1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,29 +26,7 @@
   </head>
   <body>
     <!-- <div class="container"> -->
-    <header>
-      <nav class="navigation">
-        <ul class="navigation__list">
-          <li class="navigation__item">
-            <a href="index.html"
-              ><img src="assets\svgs\well-brownish.svg" alt="logo"
-            /></a>
-          </li>
-          <div class="icons-container">
-            <li class="navigation__item">
-              <a href=""
-                ><img src="assets\svgs\search-brownish.svg" alt="search"
-              /></a>
-            </li>
-            <li class="navigation__item">
-              <a href="cart.html"
-                ><img src="assets\svgs\shopping-cart-brownish.svg" alt="cart"
-              /></a>
-            </li>
-          </div>
-        </ul>
-      </nav>
-    </header>
+  {% include 'catalog/fixed/navbar.html '%}
     <!-- </div> -->
     <!-- start main -->
     <main>
@@ -66,133 +45,44 @@
         <section class="cart">
           <div class="cart__container">
             <ul class="cart__list">
+              {% for thing in basket %}
+              {% with item=thing.item %}
               <li class="cart__item">
-                <img class="cross" src="assets\svgs\cross.svg" alt="" />
-                <a class="test" href="">
+                <button class="cross" id="delete-btn" data-id="{{item.id}}"></button>
+
+
+                <div class="test" href="">
                   <div class="cart-pic-cont">
                     <img
                       class="cart-pic"
-                      src="pictures\cart-item.png"
+                      src="{{item.main_picture.url}}"
                       alt="cart-item"
                     />
                   </div>
                   <div>
-                    <p class="price">2500 ₽</p>
+                    <p class="price">{{thing.total_price}}₽</p>
                     <h6 class="name-of-item-cart">
-                      Комплект зубьев(18шт.) Beaver
+                      {{item.full_name}}
                     </h6>
                     <span class="qnty"
                       >Кол-во:
-                      <p class="amount">1</p></span
+                      <input class="amount" type="number" value="{{thing.qty}}" id="select{{item.id}}" name="quantity" min="1" max="200"></span
                     >
+                    <button id="update-btn" class="update" data-index="{{item.id}}">update</button>
                   </div>
-                </a>
+                </div>
                 <h6 class="name-of-brand-cart">Bandit</h6>
                 <h6 class="vendor-cart">#Q10233T</h6>
               </li>
-              <li class="cart__item">
-                <img class="cross" src="assets\svgs\cross.svg" alt="" />
-                <a class="test" href="">
-                  <div class="cart-pic-cont">
-                    <img
-                      class="cart-pic"
-                      src="pictures\cart-item.png"
-                      alt="cart-item"
-                    />
-                  </div>
-                  <div>
-                    <p class="price">2500 ₽</p>
-                    <h6 class="name-of-item-cart">
-                      Комплект зубьев(18шт.) Beaver
-                    </h6>
-                    <span class="qnty"
-                      >Кол-во:
-                      <p class="amount">1</p></span
-                    >
-                  </div>
-                </a>
-                <h6 class="name-of-brand-cart">Bandit</h6>
-                <h6 class="vendor-cart">#Q10233T</h6>
-              </li>
-              <li class="cart__item">
-                <img class="cross" src="assets\svgs\cross.svg" alt="" />
-                <a class="test" href="">
-                  <div class="cart-pic-cont">
-                    <img
-                      class="cart-pic"
-                      src="pictures\cart-item.png"
-                      alt="cart-item"
-                    />
-                  </div>
-                  <div>
-                    <p class="price">2500 ₽</p>
-                    <h6 class="name-of-item-cart">
-                      Комплект зубьев(18шт.) Beaver
-                    </h6>
-                    <span class="qnty"
-                      >Кол-во:
-                      <p class="amount">1</p></span
-                    >
-                  </div>
-                </a>
-                <h6 class="name-of-brand-cart">Bandit</h6>
-                <h6 class="vendor-cart">#Q10233T</h6>
-              </li>
-              <li class="cart__item">
-                <img class="cross" src="assets\svgs\cross.svg" alt="" />
-                <a class="test" href="">
-                  <div class="cart-pic-cont">
-                    <img
-                      class="cart-pic"
-                      src="pictures\cart-item.png"
-                      alt="cart-item"
-                    />
-                  </div>
-                  <div>
-                    <p class="price">2500 ₽</p>
-                    <h6 class="name-of-item-cart">
-                      Комплект зубьев(18шт.) Beaver
-                    </h6>
-                    <span class="qnty"
-                      >Кол-во:
-                      <p class="amount">1</p></span
-                    >
-                  </div>
-                </a>
-                <h6 class="name-of-brand-cart">Bandit</h6>
-                <h6 class="vendor-cart">#Q10233T</h6>
-              </li>
-              <li class="cart__item">
-                <img class="cross" src="assets\svgs\cross.svg" alt="" />
-                <a class="test" href="">
-                  <div class="cart-pic-cont">
-                    <img
-                      class="cart-pic"
-                      src="pictures\cart-item.png"
-                      alt="cart-item"
-                    />
-                  </div>
-                  <div>
-                    <p class="price">2500 ₽</p>
-                    <h6 class="name-of-item-cart">
-                      Комплект зубьев(18шт.) Beaver
-                    </h6>
-                    <span class="qnty"
-                      >Кол-во:
-                      <p class="amount">1</p></span
-                    >
-                  </div>
-                </a>
-                <h6 class="name-of-brand-cart">Bandit</h6>
-                <h6 class="vendor-cart">#Q10233T</h6>
-              </li>
+              {% endwith %}
+              {% endfor %}
             </ul>
           </div>
           <form class="cart-form">
             <div>
               <div class="total">
                 Итог*
-                <div>7500 ₽</div>
+                <div id="subtotal">{{basket.get_total_price}}₽</div>
               </div>
             </div>
             <div class="underscore"></div>
@@ -312,8 +202,56 @@
         </div>
       </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="scripts\cart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="\static\scripts\cart.js"></script>
+        <script>
+          $(document).on('click','.cross',function(e) {
+              e.preventDefault();
+
+              $.ajax({
+                  type: 'POST',
+                  url: '{% url "basket:basket_delete" %}',
+                  data: {
+                      itemid : $(this).data('id'),
+                      csrfmiddlewaretoken : '{{csrf_token}}',
+                      action: 'delete',
+                  },
+                  success: function(json){
+                      document.getElementById('basket-qty').innerHTML = json.qty
+                      document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
+                  },
+                  error: function(xhr,errmsg,err){}
+               });
+
+          })
+
+
+<!-- update  Item  -->
+            $(document).on('click','.update',function(e) {
+              e.preventDefault();
+              var itmid = $(this).data('index');
+              $.ajax({
+                  type: 'POST',
+                  url: '{% url "basket:basket_update" %}',
+                  data: {
+                      itemid : $(this).data('index'),
+                      itemqty : $('#select' + itmid).val(),
+                      csrfmiddlewaretoken : '{{csrf_token}}',
+                      action: 'update',
+                  },
+                  success: function(json){
+                      document.getElementById('basket-qty').innerHTML = json.qty
+                      document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
+                  },
+                  error: function(xhr,errmsg,err){}
+               });
+
+          })
+
+    </script>
+
+
+
     <!-- end main -->
   </body>
 </html>
