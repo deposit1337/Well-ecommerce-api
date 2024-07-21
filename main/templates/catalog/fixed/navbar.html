@@ -10,12 +10,13 @@
                 /></a>
             </li>
             <div class="icons-container">
-                <form action="/search" method="get" class="hidden search-form">
+                <form action="{% url 'search' %}" method=POST class="hidden search-form" >
+                    {% csrf_token %}
                     <!-- Добавлен класс 'hidden' для скрытия формы -->
                     <input
                             class="search-input"
                             type="search"
-                            name="query"
+                            name="searched"
                             placeholder="Найти по артикулу"
                     />
                     <button class="find-btn" id="new-icon" type="submit"></button>
@@ -30,7 +31,7 @@
                         {% if total_qty > 0 %}
                            {{total_qty}}
                         {% else %}
-                            0
+
                         {% endif %}
                         </div>
                     {% endwith %}

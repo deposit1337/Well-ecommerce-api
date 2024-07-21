@@ -45,8 +45,8 @@ urlpatterns = [
     path('', views.home_page, name='home_page'),
     path('catalog/<slug:category_slug>/', views.catalog, name='category_catalog'),
     path('catalog/<slug:category_slug>/<int:item_id>/', views.item_detail, name='item_detail'),
-    path('basket/', include('basket.urls', namespace='basket'))
-
+    path('basket/', include('basket.urls', namespace='basket')),
+    path('search/', views.search, name='search'),
 ]
 
 if settings.DEBUG:

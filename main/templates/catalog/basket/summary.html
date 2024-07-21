@@ -47,7 +47,7 @@
             <ul class="cart__list">
               {% for thing in basket %}
               {% with item=thing.item %}
-              <li class="cart__item">
+              <li class="cart__item" data-price="{{item.price}}">
                 <button class="cross" id="delete-btn" data-id="{{item.id}}"></button>
 
 
@@ -60,7 +60,7 @@
                     />
                   </div>
                   <div>
-                    <p class="price">{{thing.total_price}}₽</p>
+                   <p class="price" id="price-item" data-item="{{item.id}}">{{thing.total_price}}₽</p>
                     <h6 class="name-of-item-cart">
                       {{item.full_name}}
                     </h6>
@@ -227,26 +227,33 @@
 
 
 <!-- update  Item  -->
-            $(document).on('click','.update',function(e) {
-              e.preventDefault();
-              var itmid = $(this).data('index');
-              $.ajax({
-                  type: 'POST',
-                  url: '{% url "basket:basket_update" %}',
-                  data: {
-                      itemid : $(this).data('index'),
-                      itemqty : $('#select' + itmid).val(),
-                      csrfmiddlewaretoken : '{{csrf_token}}',
-                      action: 'update',
-                  },
-                  success: function(json){
-                      document.getElementById('basket-qty').innerHTML = json.qty
-                      document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
-                  },
-                  error: function(xhr,errmsg,err){}
-               });
+$(document).on('click', '.update', function(e) {
+    e.preventDefault();
+    var button = $(this);
+    var itemid = button.data('index');
+    var quantityInput = $('#select' + itemid);
+    var newQuantity = quantityInput.val();
 
-          })
+    $.ajax({
+        type: 'POST',
+        url: '{% url "basket:basket_update" %}',
+        data: {
+            itemid: itemid,
+            itemqty: newQuantity,
+            csrfmiddlewaretoken: '{{csrf_token}}',
+            action: 'update',
+        },
+        success: function(json) {
+            var itemTotalPrice = newQuantity * button.closest('.cart__item').data('price');
+            button.closest('.cart__item').find('.price').text(itemTotalPrice + '₽');
+            document.getElementById('basket-qty').innerHTML = json.qty
+            document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
+        },
+        error: function(xhr, errmsg, err) {
+
+        }
+    });
+});
 
     </script>
 

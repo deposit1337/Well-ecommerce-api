@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from rest_framework import viewsets
 from rest_framework.response import Response
+from django.http import Http404
 import sys
 from .models import Item, Brand, AdditionalPicture, Category
 from .serializers import ItemSerializer, CategorySerializer, BrandSerializer, AdditionalPictureSerializer
@@ -41,14 +42,22 @@ def home_page(request):
                   {'first_three_categories': first_three_categories, 'next_three_categories': next_three_categories})
 
 
-
 def catalog(request, category_slug):
     category = Category.objects.get(slug=category_slug)
     items = Item.objects.filter(category_name=category)
     return render(request, 'catalog/catalog.html', {'category': category, 'items': items})
+
 
 def item_detail(request, category_slug, item_id):
     item = get_object_or_404(Item, id=item_id)
     return render(request, 'catalog/item-of-category.html', {'category_slug': category_slug, 'item': item})
 
 
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        item = get_object_or_404(Item, vendor=searched)
+        return redirect('item_detail', category_slug=item.category_name.slug, item_id=item.id)
+    else:
+        raise Http404("Страница не найдена")
