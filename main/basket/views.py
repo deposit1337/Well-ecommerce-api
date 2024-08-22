@@ -47,7 +47,7 @@ def basket_summary(request):
                 'Subject of the Email',
                 message,
                 settings.EMAIL_HOST_USER,  # From email address
-                [email],  # To email address
+                [settings.EMAIL_HOST_USER],  # To email address
                 fail_silently=False,
             )
 
