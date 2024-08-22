@@ -6,12 +6,59 @@ from catalog.models import Item
 from .basket import Basket
 from django.http import JsonResponse
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.sessions.backends.db import SessionStore
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponseBadRequest
+
 
 # Create your views here.
 
-
 def basket_summary(request):
+    if request.method == 'POST':
+        subtotal = int(request.POST.get('subtotal', 0))  # Получение значения subtotal из POST запроса
+        if subtotal <= 0:  # Проверка, что subtotal меньше или равен 0
+            error_message = "Добавьте что-нибудь в корзину перед отправкой заявки."
+            basket = Basket(request)
+            return render(request, 'catalog/basket/summary.html', {'basket': basket, 'error_message': error_message})
+
+        if 'fullname' in request.POST and 'email' in request.POST and 'phone' in request.POST and 'city' in request.POST:
+            fullname = request.POST['fullname']
+            email = request.POST['email']
+            phone = request.POST['phone']
+            city = request.POST['city']
+            note = request.POST.get('note', '')
+
+            basket = Basket(request)
+
+            # Accessing session data
+            session_key = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
+            session_data = {}
+            if session_key:
+                session = SessionStore(session_key)
+                session_data = session.load()
+
+            # Prepare message including session data
+            message = f"Name: {fullname}\nEmail: {email}\nPhone: {phone}\nCity: {city}\nNote: {note}\nSubtotal: {subtotal}\nSession Data: {session_data}"
+
+            send_mail(
+                'Subject of the Email',
+                message,
+                settings.EMAIL_HOST_USER,  # From email address
+                [email],  # To email address
+                fail_silently=False,
+            )
+
+            # Clear session data
+            if session_key:
+                session.delete()
+
+            return HttpResponseRedirect(reverse('basket:basket_summary'))  # Redirect after form submission
+
     basket = Basket(request)
+
     return render(request, 'catalog/basket/summary.html', {'basket': basket})
 
 
@@ -53,7 +100,6 @@ def basket_update(request):
 
         basketqty = basket.__len__()
         baskettotal = basket.get_total_price()
-
 
         response = JsonResponse({'qty': basketqty, 'subtotal': baskettotal})
         return response

@@ -28,14 +28,51 @@
     <title>Well</title>
 </head>
 <body>
-<!-- start header -->
-<!-- <div class="container"> -->
-<!-- <div class="container"> -->
-{% include 'catalog/fixed/navbar.html' %}
-<!-- </div> -->
-<!-- </div> -->
-<!-- end header -->
-<!-- start main -->
+<header>
+    <nav class="navigation">
+        <ul class="navigation__list">
+            <li class="navigation__item">
+                <a href="{% url 'home_page' %} " class="well-icon-link"
+                ><img
+                        src="\static\assets\svgs\header-logo.svg"
+                        class="well-icon"
+                        alt="logo"
+                /></a>
+            </li>
+            <div class="icons-container">
+                <form action="{% url 'search' %}" method=POST class="hidden search-form" >
+                    {% csrf_token %}
+                    <!-- Добавлен класс 'hidden' для скрытия формы -->
+                    <input
+                            class="search-input"
+                            type="search"
+                            name="searched"
+                            placeholder="Найти по артикулу"
+                    />
+                    <button class="find-btn" id="new-icon" type="submit"></button>
+                </form>
+                <li class="navigation__item" id="search-icon">
+                    <a><img src="\static\assets\svgs\search.svg" alt="search"/></a>
+                    <!-- Добавлен id 'search-icon' для поиска по клику -->
+                </li>
+                <li class="navigation__item">
+                    {% with total_qty=basket|length %}
+                    <div id="basket-qty">
+                        {% if total_qty > 0 %}
+                           {{total_qty}}
+                        {% else %}
+
+                        {% endif %}
+                        </div>
+                    {% endwith %}
+                    <a href="{% url 'basket:basket_summary' %}"
+                    ><img src="\static\assets\svgs\cart-icon.svg" alt="cart"
+                    /></a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</header>
 <main>
     <!-- start hero -->
     <!-- <div class="container"> -->

@@ -24,7 +24,7 @@ $(document).ready(function () {
     }
   });
 
-  $("#search-icon").click(function () {
+$("#search-icon").click(function () {
     if (searchForm.hasClass("expanded")) {
       searchForm
         .css("visibility", "visible")

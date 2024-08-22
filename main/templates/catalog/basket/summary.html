@@ -1,210 +1,219 @@
 <!DOCTYPE html>
 <html lang="ru">
 {% load static %}
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <meta
-      name="keywords"
-      content="sawing teeth,machines,пильные зубья,гусеницы"
+            name="keywords"
+            content="sawing teeth,machines,пильные зубья,гусеницы"
     />
-    <meta name="author" content="Well" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Well"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/reset.css' %}?v=1.1"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/main.css' %}?v=1.1"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/header.css' %}?v=1.1"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/hero.css' %}?v=1.1"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/category.css'%}?v=1.1"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/footer.css' %}?v=1.1"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/cart.css' %}?v=1.1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/cart.css' %}?v=1.1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/header.css' %}?v=1.1"/>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+            rel="stylesheet"
     />
     <title>Item of category</title>
-  </head>
-  <body>
-    <!-- <div class="container"> -->
-  {% include 'catalog/fixed/navbar.html '%}
-    <!-- </div> -->
-    <!-- start main -->
-    <main>
-      <div class="grey-stripe">
+</head>
+<body>
+
+{% include 'catalog/fixed/navbar.html' %}
+
+<main>
+    <div class="grey-stripe">
         <div class="container">
-          <div class="resolution">
-            <div class="nav-on-page">
-              Главная |
-              <a class="current-link">Корзина</a>
-            </div>
-            <h3 class="category-item">Корзина</h3>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <section class="cart">
-          <div class="cart__container">
-            <ul class="cart__list">
-              {% for thing in basket %}
-              {% with item=thing.item %}
-              <li class="cart__item" data-price="{{item.price}}">
-                <button class="cross" id="delete-btn" data-id="{{item.id}}"></button>
-
-
-                <div class="test" href="">
-                  <div class="cart-pic-cont">
-                    <img
-                      class="cart-pic"
-                      src="{{item.main_picture.url}}"
-                      alt="cart-item"
-                    />
-                  </div>
-                  <div>
-                   <p class="price" id="price-item" data-item="{{item.id}}">{{thing.total_price}}₽</p>
-                    <h6 class="name-of-item-cart">
-                      {{item.full_name}}
-                    </h6>
-                    <span class="qnty"
-                      >Кол-во:
-                      <input class="amount" type="number" value="{{thing.qty}}" id="select{{item.id}}" name="quantity" min="1" max="200"></span
-                    >
-                    <button id="update-btn" class="update" data-index="{{item.id}}">update</button>
-                  </div>
+            <div class="resolution">
+                <div class="nav-on-page">
+                    Главная |
+                    <a class="current-link">Корзина</a>
                 </div>
-                <h6 class="name-of-brand-cart">Bandit</h6>
-                <h6 class="vendor-cart">#Q10233T</h6>
-              </li>
-              {% endwith %}
-              {% endfor %}
-            </ul>
-          </div>
-          <form class="cart-form">
-            <div>
-              <div class="total">
-                Итог*
-                <div id="subtotal">{{basket.get_total_price}}₽</div>
-              </div>
+                <h3 class="category-item">Корзина</h3>
             </div>
-            <div class="underscore"></div>
-            <div class="total-line"></div>
-            <div>
-              <label for="fullname"></label>
-              <input
-                class="input"
-                placeholder="ФИО"
-                type="text"
-                id="fullname"
-                name="fullname"
-                required
-              />
+        </div>
+    </div>
+    <div class="container">
+        <section class="cart">
+            <div class="cart__container">
+                <ul class="cart__list">
+                    {% for thing in basket %}
+                    {% with item=thing.item %}
+                    <li class="cart__item" data-price="{{item.price}}">
+                        <button class="cross" id="delete-btn" data-id="{{item.id}}"></button>
+
+
+                        <div class="test" href="">
+                            <div class="cart-pic-cont">
+                                <img
+                                        class="cart-pic"
+                                        src="{{item.main_picture.url}}"
+                                        alt="cart-item"
+                                />
+                            </div>
+                            <div>
+                                <p class="price" id="price-item" data-item="{{item.id}}">{{thing.total_price}}₽</p>
+                                <h6 class="name-of-item-cart">
+                                    {{item.full_name}}
+                                </h6>
+                                <span class="qnty"
+                                >Кол-во:
+                      <input class="amount" type="number" value="{{thing.qty}}" id="select{{item.id}}" name="quantity"
+                             min="1" max="200"></span>
+
+                                <button id="update-btn" class="update" data-index="{{item.id}}">update</button>
+                            </div>
+                        </div>
+                        <h6 class="name-of-brand-cart">Bandit</h6>
+                        <h6 class="vendor-cart">#Q10233T</h6>
+                    </li>
+                    {% endwith %}
+                    {% endfor %}
+                </ul>
             </div>
-            <div>
-              <label for="email"></label>
-              <input
-                placeholder="Email"
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
-            <div>
-              <label for="phone"></label>
-              <input
-                placeholder="Телефон"
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-              />
-            </div>
-            <div>
-              <label for="city"></label>
-              <input placeholder="Город" type="text" id="city" name="city" />
-            </div>
-            <div>
-              <label for="note"></label>
-              <textarea
-                class="note"
-                placeholder="Примечание (при необходимости)"
-                id="note"
-                name="note"
-              ></textarea>
-            </div>
-            <div class="btn-cont">
-              <button class="sub-btn" type="submit">Отправить заявку</button>
-            </div>
-          </form>
+            <form class="cart-form" method="POST" action="{% url 'basket:basket_summary' %}">
+                {%csrf_token%}
+                <div>
+                    <div class="total">
+                        Итог*
+                        <div id="subtotall">{{basket.get_total_price}}₽</div>
+                        <input type="hidden" id="subtotal" name="subtotal" value="{{basket.get_total_price}}">
+                    </div>
+                </div>
+                {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+                {% endif %}
+                <div class="underscore"></div>
+                <div class="total-line"></div>
+                <div>
+                    <label for="fullname"></label>
+                    <input
+                            class="input"
+                            placeholder="ФИО"
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            required
+                    />
+                </div>
+                <div>
+                    <label for="email"></label>
+                    <input
+                            placeholder="Email"
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                    />
+                </div>
+                <div>
+                    <label for="phone"></label>
+                    <input
+                            placeholder="Телефон"
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            required
+                    />
+                </div>
+                <div>
+                    <label for="city"></label>
+                    <input placeholder="Город" type="text" id="city" name="city"/>
+                </div>
+                <div>
+                    <label for="note"></label>
+                    <textarea
+                            class="note"
+                            placeholder="Примечание (при необходимости)"
+                            id="note"
+                            name="note"
+                    ></textarea>
+                </div>
+                <div class="btn-cont">
+                    <button class="sub-btn" type="submit">Отправить заявку</button>
+                </div>
+            </form>
         </section>
-      </div>
-    </main>
-    <footer class="">
-      <div class="container-footer">
+    </div>
+</main>
+<footer class="">
+    <div class="container-footer">
         <div class="top-footer">
-          <img src="assets\svgs\shortend.svg" alt="w-short" />
-          <p class="footer-par">Вопросы по номеру</p>
-          <address class="phone">+7 (800) 5534-228</address>
-          <address class="mail">pochta@mail.ru</address>
+            <img src="assets\svgs\shortend.svg" alt="w-short"/>
+            <p class="footer-par">Вопросы по номеру</p>
+            <address class="phone">+7 (800) 5534-228</address>
+            <address class="mail">pochta@mail.ru</address>
         </div>
         <div class="navigation-footer-container">
-          <p class="nav-footer">Навигация по сайту</p>
-          <nav class="navigation-footer">
-            <ul class="nav-footer__list">
-              <li class="nav-footer__item">
-                <a href="">Категория 1</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 2</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 3</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 4</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 5</a>
-              </li>
-              <li class="nav-footer__item">
-                <a href="">Категория 6</a>
-              </li>
-            </ul>
-          </nav>
+            <p class="nav-footer">Навигация по сайту</p>
+            <nav class="navigation-footer">
+                <ul class="nav-footer__list">
+                    <li class="nav-footer__item">
+                        <a href="">Категория 1</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 2</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 3</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 4</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 5</a>
+                    </li>
+                    <li class="nav-footer__item">
+                        <a href="">Категория 6</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="footer-info-container">
-          <h6 class="footer-info">
-            Компания «Тимбермаш Байкал» - дилер спецтехники мировых брендов
-            Sany, Merko, Mesda, HBXG (Shewa), Rotobec (RTB), Hangcha, YTO,
-            Orthaus, CHC Nav, FJDynamics, Gehl, Manitou, John Deere, FAE,
-            Waratah, Ponsse, Gregoire Bessone, Lucas. Мы предлагаем спецтехнику
-            для дорожно-строительной, лесозаготовительной, сельскохозяйственной
-            отрасли, а также оригинальные запчасти и качественный сервис.
-            Тимбермаш Байкал - это надежная спецтехника в наличии и под заказ;
-            передовые технологии в обслуживании техники; квалифицированные
-            специалисты сервиса. Приобретайте спецтехнику в лизинг на выгодных
-            условиях, действует услуга Trade-IN, предлагаем варианты техники со
-            стажем (б/у).
-          </h6>
+            <h6 class="footer-info">
+                Компания «Тимбермаш Байкал» - дилер спецтехники мировых брендов
+                Sany, Merko, Mesda, HBXG (Shewa), Rotobec (RTB), Hangcha, YTO,
+                Orthaus, CHC Nav, FJDynamics, Gehl, Manitou, John Deere, FAE,
+                Waratah, Ponsse, Gregoire Bessone, Lucas. Мы предлагаем спецтехнику
+                для дорожно-строительной, лесозаготовительной, сельскохозяйственной
+                отрасли, а также оригинальные запчасти и качественный сервис.
+                Тимбермаш Байкал - это надежная спецтехника в наличии и под заказ;
+                передовые технологии в обслуживании техники; квалифицированные
+                специалисты сервиса. Приобретайте спецтехнику в лизинг на выгодных
+                условиях, действует услуга Trade-IN, предлагаем варианты техники со
+                стажем (б/у).
+            </h6>
         </div>
         <div class="credits">
-          <p class="credits_txt">
-            Designed and built with all the love in the world by the
-            <a class="depo" href="">depo</a> .
-            <span class="license"
-              >Code licensed <a class="mit" href="">MIT</a></span
-            >.
-          </p>
+            <p class="credits_txt">
+                Designed and built with all the love in the world by the
+                <a class="depo" href="">depo</a> .
+                <span class="license"
+                >Code licensed <a class="mit" href="">MIT</a></span
+                >.
+            </p>
         </div>
-      </div>
-      <div class="bottom-footer">
+    </div>
+    <div class="bottom-footer">
         <div class="dark-stripe">
-          <span class="commerce">© Well, Russia. Все права защищены.</span>
+            <span class="commerce">© Well, Russia. Все права защищены.</span>
         </div>
-      </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="\static\scripts\cart.js"></script>
-        <script>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="\static\scripts\index.js"></script>
+<script src="\static\scripts\cart.js"></script>
+
+<script>
           $(document).on('click','.cross',function(e) {
               e.preventDefault();
 
@@ -218,7 +227,7 @@
                   },
                   success: function(json){
                       document.getElementById('basket-qty').innerHTML = json.qty
-                      document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
+                      document.getElementById('subtotall').innerHTML = json.subtotal + '₽'
                   },
                   error: function(xhr,errmsg,err){}
                });
@@ -226,39 +235,54 @@
           })
 
 
+
 <!-- update  Item  -->
-$(document).on('click', '.update', function(e) {
-    e.preventDefault();
-    var button = $(this);
-    var itemid = button.data('index');
-    var quantityInput = $('#select' + itemid);
-    var newQuantity = quantityInput.val();
+    $(document).on('click', '.update', function(e) {
+        e.preventDefault();
+        var button = $(this);
+        var itemid = button.data('index');
+        var quantityInput = $('#select' + itemid);
+        var newQuantity = quantityInput.val();
 
-    $.ajax({
-        type: 'POST',
-        url: '{% url "basket:basket_update" %}',
-        data: {
-            itemid: itemid,
-            itemqty: newQuantity,
-            csrfmiddlewaretoken: '{{csrf_token}}',
-            action: 'update',
-        },
-        success: function(json) {
-            var itemTotalPrice = newQuantity * button.closest('.cart__item').data('price');
-            button.closest('.cart__item').find('.price').text(itemTotalPrice + '₽');
-            document.getElementById('basket-qty').innerHTML = json.qty
-            document.getElementById('subtotal').innerHTML = json.subtotal + '₽'
-        },
-        error: function(xhr, errmsg, err) {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_update" %}',
+            data: {
+                itemid: itemid,
+                itemqty: newQuantity,
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'update',
+            },
+            success: function(json) {
+                var itemTotalPrice = newQuantity * button.closest('.cart__item').data('price');
+                button.closest('.cart__item').find('.price').text(itemTotalPrice + '₽');
+                document.getElementById('basket-qty').innerHTML = json.qty
+                document.getElementById('subtotall').innerHTML = json.subtotal + '₽'
+            },
+            error: function(xhr, errmsg, err) {
 
+            }
+        });
+    });
+
+</script>
+<script>
+    let formSubmitted = false;
+    const form = document.querySelector('.cart-form');
+
+    form.addEventListener('submit', function(event) {
+        if (formSubmitted) {
+            event.preventDefault(); // Предотвращаем отправку формы, если уже была отправка
+        } else {
+            formSubmitted = true;
+            setTimeout(() => {
+                formSubmitted = false;
+            }, 3000); // 3000 миллисекунд = 3 секунды
         }
     });
-});
-
-    </script>
+</script>
 
 
-
-    <!-- end main -->
-  </body>
+<!-- end main -->
+</body>
 </html>
