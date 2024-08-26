@@ -92,13 +92,13 @@
                     {% for item in items %}
                     <li class="category-items__item">
                         <div class="category-item-link" href="item-of-category.html">
-                            <a href="{% url 'item_detail' category_slug=category.slug item_id=item.id %}"
-                            ><img src="{{ item.main_picture.url }}" alt="category item"
-                            /></a>
+                            <a href="{% url 'item_detail' category_slug=category.slug item_id=item.id %}">
+                                <img src="{{ item.main_picture.url }}" alt="category item">
+                            </a>
                             <h6 class="name-of-brand">{{item.brand}}</h6>
                             <h6 class="vendor">#Q10233T</h6>
-                            <button onclick="changeColorCat()" class="add-to-cart-btn">
-                                В корзину
+                            <button class="add-to-cart-btn" data-id="{{item.id}}">
+                                Добавить в корзину
                             </button>
                         </div>
                     </li>
@@ -184,6 +184,54 @@
 <script src="\static\scripts\index.js"></script>
 <script src="\static\scripts\category.js"></script>
 
+
+<script>
+$(document).on('click', '.add-to-cart-btn', function(e) {
+    e.preventDefault();
+
+    var button = $(this);
+    var itemId = button.data('id');
+
+    var buttonText = button.text().trim();
+
+    if (buttonText === 'Добавить в корзину') {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_add" %}',
+            data: {
+                itemid: itemId,
+                itemqty: 1,
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'post',
+            },
+            success: function (json) {
+                document.getElementById('basket-qty').innerHTML = json.qty;
+                button.text('Удалить из корзины');
+            },
+            error: function (xhr, errmsg, err) {
+                // Обработка ошибок при добавлении товара в корзину
+            }
+        });
+    } else {
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_delete" %}',
+            data: {
+                itemid: itemId,
+                csrfmiddlewaretoken: '{{csrf_token}}',
+                action: 'delete',
+            },
+            success: function (json) {
+                document.getElementById('basket-qty').innerHTML = json.qty;
+                button.text('Добавить в корзину');
+            },
+            error: function (xhr, errmsg, err) {
+                // Обработка ошибок при удалении товара из корзины
+            }
+        });
+    }
+});
+</script>
 
 </html>
 <!-- end footer -->

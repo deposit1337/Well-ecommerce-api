@@ -18,7 +18,7 @@ from django.http import HttpResponseBadRequest
 
 def basket_summary(request):
     if request.method == 'POST':
-        subtotal = int(request.POST.get('subtotal', 0))  # Получение значения subtotal из POST запроса
+        subtotal = int(request.POST.get('subtotal', 0))
         if subtotal <= 0:  # Проверка, что subtotal меньше или равен 0
             error_message = "Добавьте что-нибудь в корзину перед отправкой заявки."
             basket = Basket(request)
@@ -103,3 +103,6 @@ def basket_update(request):
 
         response = JsonResponse({'qty': basketqty, 'subtotal': baskettotal})
         return response
+
+
+

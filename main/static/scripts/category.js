@@ -23,17 +23,38 @@ function changeColor() {
 
 
 
-function changeColorCat() {
-  var buttonCategory = document.querySelector(".add-to-cart-btn");
 
-  if (buttonCategory.classList.contains("clicked")) {
-    buttonCategory.classList.remove("clicked");
-    buttonCategory.innerText = "В корзину";
-  } else {
-    buttonCategory.classList.add("clicked");
-    buttonCategory.innerText = "Добавлено";
-  }
-}
+
+
+//
+//function changeColorCat(buttonCategory) {
+//  if (buttonCategory.classList.contains("clicked")) {
+//    buttonCategory.classList.remove("clicked");
+//    buttonCategory.innerText = "В корзину";
+//  } else {
+//    buttonCategory.classList.add("clicked");
+//    buttonCategory.innerText = "Добавлено";
+//  }
+//}
+//
+//document.addEventListener("DOMContentLoaded", function() {
+//  var buttonsCategory = document.querySelectorAll(".add-to-cart-btn");
+//
+//  buttonsCategory.forEach(function(button) {
+//    button.addEventListener("click", function() {
+//      changeColorCat(button);
+//    });
+//  });
+//});
+
+
+
+
+
+
+
+
+
 
 
 // drop list
