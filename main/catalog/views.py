@@ -45,7 +45,8 @@ def home_page(request):
 def catalog(request, category_slug):
     category = Category.objects.get(slug=category_slug)
     items = Item.objects.filter(category_name=category)
-    return render(request, 'catalog/catalog.html', {'category': category, 'items': items})
+    cart_data = request.session.get('skey', {})
+    return render(request, 'catalog/catalog.html', {'category': category, 'items': items, 'cart_data': cart_data})
 
 
 def item_detail(request, category_slug, item_id):

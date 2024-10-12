@@ -26,7 +26,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
             rel="stylesheet"
     />
-
+    {{ cart_data|json_script:"cart-data" }}
     <title>Well</title>
 </head>
 <body>
@@ -97,12 +97,15 @@
                             </a>
                             <h6 class="name-of-brand">{{item.brand}}</h6>
                             <h6 class="vendor">#Q10233T</h6>
-                            <button class="add-to-cart-btn" data-id="{{item.id}}">
-                                Добавить в корзину
+                            <button class="{% if item.id in cart_data %}add-to-cart-btn off{% else %}add-to-cart-btn on{% endif %}"
+                                    id="{{ item.id }}" data-id="{{ item.id }}">
+                                {% if item.id in cart_data %}Удалить{% else %}В корзину{% endif %}
                             </button>
+
                         </div>
                     </li>
                     {% endfor %}
+                    {{cart_data}}
                 </div>
                 <div class="container-fixed">
 
@@ -182,54 +185,97 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!--<script src="\static\scripts\hero.js"></script>-->
 <script src="\static\scripts\index.js"></script>
-<script src="\static\scripts\category.js"></script>
+
+<!--<script src="\static\scripts\category.js"></script>-->
 
 
 <script>
-$(document).on('click', '.add-to-cart-btn', function(e) {
-    e.preventDefault();
 
-    var button = $(this);
-    var itemId = button.data('id');
 
-    var buttonText = button.text().trim();
+</script>
 
-    if (buttonText === 'Добавить в корзину') {
-        $.ajax({
-            type: 'POST',
-            url: '{% url "basket:basket_add" %}',
-            data: {
-                itemid: itemId,
-                itemqty: 1,
-                csrfmiddlewaretoken: '{{csrf_token}}',
-                action: 'post',
-            },
-            success: function (json) {
-                document.getElementById('basket-qty').innerHTML = json.qty;
-                button.text('Удалить из корзины');
-            },
-            error: function (xhr, errmsg, err) {
-                // Обработка ошибок при добавлении товара в корзину
-            }
-        });
-    } else {
-        $.ajax({
-            type: 'POST',
-            url: '{% url "basket:basket_delete" %}',
-            data: {
-                itemid: itemId,
-                csrfmiddlewaretoken: '{{csrf_token}}',
-                action: 'delete',
-            },
-            success: function (json) {
-                document.getElementById('basket-qty').innerHTML = json.qty;
-                button.text('Добавить в корзину');
-            },
-            error: function (xhr, errmsg, err) {
-                // Обработка ошибок при удалении товара из корзины
-            }
-        });
-    }
+
+<script>
+$(document).ready(function() {
+    // Инициализация всех кнопок
+
+
+    const cartData = JSON.parse(document.getElementById('cart-data').textContent);
+    console.log(cartData);
+
+
+    $('button').each(function() {
+        const buttonId = this.id; // Получаем id текущей кнопки
+
+        // Проверяем значение в localStorage для каждой кнопки
+        const value = localStorage.getItem(buttonId);
+            if (value === '2' &&  buttonId in cartData ) {
+            $(this).removeClass('on').addClass('off').text('Удалить');
+
+        } else {
+            $(this).removeClass('off').addClass('on').text('В корзину');
+            localStorage.setItem(buttonId, '1');
+        }
+    });
+
+    // Обработчик клика на все кнопки
+    $('button').click(function(e) {
+        e.preventDefault();
+        var button = $(this);
+        var itemId = button.data('id');
+
+        var currentValue = parseInt(localStorage.getItem(itemId)) || 1;
+
+        // Меняем значение на 1 или 2, в зависимости от текущего состояния
+        if (currentValue === 1) {
+            currentValue = 2;
+            button.removeClass('on').addClass('off').text('Удалить');
+
+        } else {
+            currentValue = 1;
+            button.removeClass('off').addClass('on').text('В корзину');
+
+        }
+
+        // Записываем новое значение в localStorage
+        localStorage.setItem(itemId, currentValue);
+
+        // Отправка AJAX запроса на добавление или удаление из корзины
+        if (currentValue === 2) {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "basket:basket_add" %}',
+                data: {
+                    itemid: itemId,
+                    itemqty: 1,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post',
+                },
+                success: function(json) {
+                    document.getElementById('basket-qty').innerHTML = json.qty;
+                },
+                error: function(xhr, errmsg, err) {
+                    // Обработка ошибок при добавлении товара в корзину
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '{% url "basket:basket_delete" %}',
+                data: {
+                    itemid: itemId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'delete',
+                },
+                success: function(json) {
+                    document.getElementById('basket-qty').innerHTML = json.qty;
+                },
+                error: function(xhr, errmsg, err) {
+                    // Обработка ошибок при удалении товара из корзины
+                }
+            });
+        }
+    });
 });
 </script>
 

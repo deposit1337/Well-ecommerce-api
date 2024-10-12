@@ -168,6 +168,19 @@ footer {
   display: none;
 }
 
+.on{
+    background-color: var(--brand);
+}
+.off{
+      background-color: transparent;
+
+  border-width: 2px;
+  color: var(--tanner);
+  font-weight: 900;
+  border-color: #bea6a1;
+}
+
+
 .clicked {
   background-color: transparent;
   border-color: var(--tan);
